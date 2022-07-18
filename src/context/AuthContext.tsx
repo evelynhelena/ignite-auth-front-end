@@ -80,7 +80,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 roles
             })
 
-            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            api.interceptors.request.use(
+                async (config) => {
+                  config.headers = {
+                    Authorization: `Bearer ${token}`,
+                  };
+        
+                  return config;
+                },
+                (error) => Promise.reject(error)
+              );
 
             Router.push('/dashboard');
         } catch (e) {

@@ -78,7 +78,6 @@ api.interceptors.response.use(response => {
             });
 
         } else {
-            console.log("aqui")
             signOut(); 
         }
     }
